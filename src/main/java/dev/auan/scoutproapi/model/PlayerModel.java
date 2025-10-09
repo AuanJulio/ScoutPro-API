@@ -1,9 +1,11 @@
 package dev.auan.scoutproapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,6 +17,7 @@ public class PlayerModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "full_name")
@@ -37,5 +40,13 @@ public class PlayerModel {
 
     @Column(name = "weight_kg")
     private Double weightKg;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "club_id")
+    private ClubModel club;
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
+    private List<ScoutReportModel> scoutReports;
 
 }
