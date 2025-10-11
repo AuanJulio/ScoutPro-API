@@ -22,18 +22,18 @@ public class ClubController {
     }
 
     @GetMapping("/{id}")
-    public String getClubById() {
-        return "Club by ID";
+    public ClubModel getClubById(@PathVariable int id) {
+        return clubService.getClubById(id);
     }
 
     @PostMapping
-    public String createClub() {
-        return "Create Club";
+    public ClubModel createClub(@RequestBody ClubModel club) {
+        return clubService.createClub(club);
     }
 
     @PutMapping("/{id}")
-    public String updateClubById() {
-        return "Update Club by ID";
+    public ClubModel updateClubById(@PathVariable int id, @RequestBody ClubModel club) {
+        return clubService.updateClubById(id, club);
     }
 
     @GetMapping("/{id}/players")

@@ -20,4 +20,22 @@ public class ClubService {
         return clubRepository.findAll();
     }
 
+    public ClubModel getClubById(int id) {
+        Optional<ClubModel> club = clubRepository.findById(id);
+        return club.orElse(null);
+    }
+
+    public ClubModel createClub(ClubModel club) {
+        return clubRepository.save(club);
+    }
+
+    public ClubModel updateClubById(int id, ClubModel club) {
+        return clubRepository.findById(id).map(existing -> {
+            if (club.getName() != null) existing.setName(club.getName());
+            if (club.getCountry() != null) existing.setCountry(club.getCountry());
+            if (club.getLeague() != null) existing.setLeague(club.getLeague());
+            return clubRepository.save(existing);
+        }).orElse(null);
+    }
+
 }
