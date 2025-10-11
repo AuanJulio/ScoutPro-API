@@ -1,8 +1,10 @@
 package dev.auan.scoutproapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ public class PlayerModel {
     private String knowAs;
 
     @Column(name = "birth_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Column(name = "nationality")
@@ -41,7 +44,7 @@ public class PlayerModel {
     @Column(name = "weight_kg")
     private Double weightKg;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "club_id")
     private ClubModel club;
 
