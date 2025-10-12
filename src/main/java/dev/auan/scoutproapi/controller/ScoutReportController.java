@@ -1,34 +1,29 @@
 package dev.auan.scoutproapi.controller;
 
+import dev.auan.scoutproapi.model.ScoutReportModel;
+import dev.auan.scoutproapi.service.ScoutReportService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/players/{playerId}/reports")
 public class ScoutReportController {
 
+    private final ScoutReportService scoutReportService;
+
+    public ScoutReportController(ScoutReportService scoutReportService) {
+        this.scoutReportService = scoutReportService;
+    }
+
     @GetMapping
-    public String getScoutReportsByPlayerId() {
-        return "Scout Reports by Player ID";
+    public List<ScoutReportModel> getScoutReportsByPlayerId(@PathVariable int playerId) {
+        return scoutReportService.getScoutReportsByPlayerId(playerId);
     }
 
     @PostMapping
-    public String createScoutReport() {
-        return "Create Scout Report for Player";
-    }
-
-    @GetMapping("/{reportId}")
-    public String getScoutReportById() {
-        return "Scout Report by ID";
-    }
-
-    @PutMapping("/{reportId}")
-    public String updateScoutReportById() {
-        return "Update Scout Report by ID";
-    }
-
-    @DeleteMapping("/{reportId}")
-    public String deleteScoutReportById() {
-        return "Delete Scout Report by ID";
+    public ScoutReportModel createScoutReport(@PathVariable int playerId, @RequestBody ScoutReportModel scoutReport) {
+        return scoutReportService.createScoutReport(playerId, scoutReport);
     }
 
 }
