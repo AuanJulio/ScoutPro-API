@@ -46,6 +46,7 @@ public class PlayerModel {
 
     @ManyToOne
     @JoinColumn(name = "club_id")
+    @JsonIgnore
     private ClubModel club;
 
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL,orphanRemoval = true)
