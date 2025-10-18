@@ -30,6 +30,7 @@ public class ClubMapper {
         club.setName(dto.getName());
         club.setCountry(dto.getCountry());
         club.setLeague(dto.getLeague());
+        club.setPlayers(dto.getPlayers());
         return club;
     }
 
@@ -39,6 +40,7 @@ public class ClubMapper {
         dto.setName(club.getName());
         dto.setCountry(club.getCountry());
         dto.setLeague(club.getLeague());
+        dto.setPlayers(club.getPlayers());
         return dto;
     }
 

@@ -1,5 +1,7 @@
 package dev.auan.scoutproapi.controller;
 
+import dev.auan.scoutproapi.dto.ClubRequestDTO;
+import dev.auan.scoutproapi.dto.ClubResponseDTO;
 import dev.auan.scoutproapi.model.ClubModel;
 import dev.auan.scoutproapi.service.ClubService;
 import org.springframework.web.bind.annotation.*;
@@ -17,22 +19,22 @@ public class ClubController {
     }
 
     @GetMapping
-    public List<ClubModel> getClubs() {
+    public List<ClubResponseDTO> getClubs() {
         return clubService.getAllClubs();
     }
 
     @GetMapping("/{id}")
-    public ClubModel getClubById(@PathVariable int id) {
+    public ClubResponseDTO getClubById(@PathVariable int id) {
         return clubService.getClubById(id);
     }
 
     @PostMapping
-    public ClubModel createClub(@RequestBody ClubModel club) {
+    public ClubResponseDTO createClub(@RequestBody ClubRequestDTO club) {
         return clubService.createClub(club);
     }
 
     @PutMapping("/{id}")
-    public ClubModel updateClubById(@PathVariable int id, @RequestBody ClubModel club) {
+    public ClubResponseDTO updateClubById(@PathVariable int id, @RequestBody ClubRequestDTO club) {
         return clubService.updateClubById(id, club);
     }
 
