@@ -10,23 +10,19 @@ public class ScoutReportMapper {
 
     public ScoutReportModel mapRequest(ScoutReportRequestDTO dto) {
         ScoutReportModel scoutReport = new ScoutReportModel();
-        scoutReport.setReportDate(dto.getReportDate());
         scoutReport.setScoutName(dto.getScoutName());
         scoutReport.setPotentialScore(dto.getPotentialScore());
         scoutReport.setStregths(dto.getStregths());
         scoutReport.setWeaknesses(dto.getWeaknesses());
-        scoutReport.setPlayer(dto.getPlayer());
         return scoutReport;
     }
 
     public ScoutReportRequestDTO mapRequest(ScoutReportModel scoutReport) {
         ScoutReportRequestDTO dto = new ScoutReportRequestDTO();
-        dto.setReportDate(scoutReport.getReportDate());
         dto.setScoutName(scoutReport.getScoutName());
         dto.setPotentialScore(scoutReport.getPotentialScore());
         dto.setStregths(scoutReport.getStregths());
         dto.setWeaknesses(scoutReport.getWeaknesses());
-        dto.setPlayer(scoutReport.getPlayer());
         return dto;
     }
 
@@ -38,6 +34,7 @@ public class ScoutReportMapper {
         dto.setPotentialScore(scoutReport.getPotentialScore());
         dto.setStregths(scoutReport.getStregths());
         dto.setWeaknesses(scoutReport.getWeaknesses());
+        dto.setPlayer(scoutReport.getPlayer());
         return dto;
     }
 
@@ -49,6 +46,7 @@ public class ScoutReportMapper {
         scoutReport.setPotentialScore(dto.getPotentialScore());
         scoutReport.setStregths(dto.getStregths());
         scoutReport.setWeaknesses(dto.getWeaknesses());
+        scoutReport.setPlayer(dto.getPlayer());
         return scoutReport;
     }
 

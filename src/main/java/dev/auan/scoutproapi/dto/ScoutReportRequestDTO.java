@@ -10,11 +10,9 @@ import java.time.LocalDateTime;
 @Setter
 public class ScoutReportRequestDTO {
 
-    private LocalDateTime reportDate;
     private String scoutName;
     private Integer potentialScore;
     private String stregths;
     private String weaknesses;
-    private PlayerModel player;
 
 }
