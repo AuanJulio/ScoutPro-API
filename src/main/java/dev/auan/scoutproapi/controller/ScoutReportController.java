@@ -1,5 +1,7 @@
 package dev.auan.scoutproapi.controller;
 
+import dev.auan.scoutproapi.dto.ScoutReportRequestDTO;
+import dev.auan.scoutproapi.dto.ScoutReportResponseDTO;
 import dev.auan.scoutproapi.model.ScoutReportModel;
 import dev.auan.scoutproapi.service.ScoutReportService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +19,12 @@ public class ScoutReportController {
     }
 
     @GetMapping
-    public List<ScoutReportModel> getScoutReportsByPlayerId(@PathVariable int playerId) {
+    public List<ScoutReportResponseDTO> getScoutReportsByPlayerId(@PathVariable int playerId) {
         return scoutReportService.getScoutReportsByPlayerId(playerId);
     }
 
     @PostMapping
-    public ScoutReportModel createScoutReport(@PathVariable int playerId, @RequestBody ScoutReportModel scoutReport) {
+    public ScoutReportResponseDTO createScoutReport(@PathVariable int playerId, @RequestBody ScoutReportRequestDTO scoutReport) {
         return scoutReportService.createScoutReport(playerId, scoutReport);
     }
 
