@@ -1,33 +1,43 @@
 package dev.auan.scoutproapi.service;
 
+import dev.auan.scoutproapi.dto.PlayerRequestDTO;
+import dev.auan.scoutproapi.dto.PlayerResponseDTO;
+import dev.auan.scoutproapi.mapper.PlayerMapper;
 import dev.auan.scoutproapi.model.PlayerModel;
 import dev.auan.scoutproapi.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final PlayerMapper playerMapper;
 
-    public PlayerService(PlayerRepository playerRepository) {
+    public PlayerService(PlayerRepository playerRepository, PlayerMapper playerMapper) {
         this.playerRepository = playerRepository;
+        this.playerMapper = playerMapper;
     }
 
-    public List<PlayerModel> getPlayers() {
-        return playerRepository.findAll();
+    public List<PlayerResponseDTO> getPlayers() {
+        List<PlayerModel> players = playerRepository.findAll();
+        return players.stream().map(playerMapper::mapResponse).toList();
     }
 
-    public PlayerModel getPlayerById(int id) {
-        return playerRepository.findById(id).orElse(null);
+    public PlayerResponseDTO getPlayerById(int id) {
+        Optional<PlayerModel> player = playerRepository.findById(id);
+        return player.map(playerMapper::mapResponse).orElse(null);
     }
 
-    public PlayerModel createPlayer(PlayerModel player) {
-        return playerRepository.save(player);
+    public PlayerResponseDTO createPlayer(PlayerRequestDTO player) {
+        PlayerModel newPlayer = playerMapper.mapRequest(player);
+        newPlayer = playerRepository.save(newPlayer);
+        return playerMapper.mapResponse(newPlayer);
     }
 
-    public PlayerModel updatePlayerById(int id, PlayerModel player) {
+    public PlayerResponseDTO updatePlayerById(int id, PlayerRequestDTO player) {
         return playerRepository.findById(id).map(existing -> {
             if (player.getFullName() != null) existing.setFullName(player.getFullName());
             if (player.getKnowAs() != null) existing.setKnowAs(player.getKnowAs());
@@ -37,7 +47,9 @@ public class PlayerService {
             if (player.getHeightCm() != 0) existing.setHeightCm(player.getHeightCm());
             if (player.getWeightKg() != null) existing.setWeightKg(player.getWeightKg());
             if (player.getClub() != null) existing.setClub(player.getClub());
-            return playerRepository.save(existing);
+
+            PlayerModel updatedPlayer = playerRepository.save(existing);
+            return playerMapper.mapResponse(updatedPlayer);
         }).orElse(null);
     }
 

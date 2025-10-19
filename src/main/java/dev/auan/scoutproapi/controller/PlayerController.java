@@ -1,5 +1,7 @@
 package dev.auan.scoutproapi.controller;
 
+import dev.auan.scoutproapi.dto.PlayerRequestDTO;
+import dev.auan.scoutproapi.dto.PlayerResponseDTO;
 import dev.auan.scoutproapi.model.ClubModel;
 import dev.auan.scoutproapi.model.PlayerModel;
 import dev.auan.scoutproapi.service.PlayerService;
@@ -18,22 +20,22 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerModel> getPlayers() {
+    public List<PlayerResponseDTO> getPlayers() {
         return playerService.getPlayers();
     }
 
     @GetMapping("/{id}")
-    public PlayerModel getPlayerById(@PathVariable int id) {
+    public PlayerResponseDTO getPlayerById(@PathVariable int id) {
         return playerService.getPlayerById(id);
     }
 
     @PostMapping
-    public PlayerModel createPlayer(@RequestBody PlayerModel player) {
+    public PlayerResponseDTO createPlayer(@RequestBody PlayerRequestDTO player) {
         return playerService.createPlayer(player);
     }
 
     @PutMapping("/{id}")
-    public PlayerModel updatePlayerById(@PathVariable int id, @RequestBody PlayerModel player) {
+    public PlayerResponseDTO updatePlayerById(@PathVariable int id, @RequestBody PlayerRequestDTO player) {
         return playerService.updatePlayerById(id, player);
     }
 
