@@ -20,6 +20,7 @@ public class PlayerResponseDTO {
     private String knowAs;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
+    private String position;
     private String nationality;
     private int heightCm;
     private Double weightKg;

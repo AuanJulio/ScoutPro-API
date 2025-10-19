@@ -16,6 +16,7 @@ public class PlayerRequestDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     private String nationality;
+    private String position;
     private int heightCm;
     private Double weightKg;
     private ClubModel club;

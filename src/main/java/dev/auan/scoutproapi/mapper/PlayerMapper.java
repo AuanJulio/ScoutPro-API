@@ -14,6 +14,7 @@ public class PlayerMapper {
         player.setKnowAs(dto.getKnowAs());
         player.setBirthDate(dto.getBirthDate());
         player.setNationality(dto.getNationality());
+        player.setPosition(dto.getPosition());
         player.setHeightCm(dto.getHeightCm());
         player.setWeightKg(dto.getWeightKg());
         player.setClub(dto.getClub());
@@ -26,6 +27,7 @@ public class PlayerMapper {
         dto.setKnowAs(player.getKnowAs());
         dto.setBirthDate(player.getBirthDate());
         dto.setNationality(player.getNationality());
+        dto.setPosition(player.getPosition());
         dto.setHeightCm(player.getHeightCm());
         dto.setWeightKg(player.getWeightKg());
         dto.setClub(player.getClub());
@@ -39,6 +41,7 @@ public class PlayerMapper {
         player.setKnowAs(dto.getKnowAs());
         player.setBirthDate(dto.getBirthDate());
         player.setNationality(dto.getNationality());
+        player.setPosition(dto.getPosition());
         player.setHeightCm(dto.getHeightCm());
         player.setWeightKg(dto.getWeightKg());
         return player;
@@ -51,6 +54,7 @@ public class PlayerMapper {
         dto.setKnowAs(player.getKnowAs());
         dto.setBirthDate(player.getBirthDate());
         dto.setNationality(player.getNationality());
+        dto.setPosition(player.getPosition());
         dto.setHeightCm(player.getHeightCm());
         dto.setWeightKg(player.getWeightKg());
         return dto;
