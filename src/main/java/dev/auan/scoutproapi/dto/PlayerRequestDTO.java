@@ -1,0 +1,23 @@
+package dev.auan.scoutproapi.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import dev.auan.scoutproapi.model.ClubModel;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.Date;
+
+@Getter
+@Setter
+public class PlayerRequestDTO {
+
+    private String fullName;
+    private String knowAs;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthDate;
+    private String nationality;
+    private int heightCm;
+    private Double weightKg;
+    private ClubModel club;
+
+}
