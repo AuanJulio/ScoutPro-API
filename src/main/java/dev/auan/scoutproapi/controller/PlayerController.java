@@ -5,6 +5,8 @@ import dev.auan.scoutproapi.dto.PlayerResponseDTO;
 import dev.auan.scoutproapi.model.ClubModel;
 import dev.auan.scoutproapi.model.PlayerModel;
 import dev.auan.scoutproapi.service.PlayerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,28 +22,48 @@ public class PlayerController {
     }
 
     @GetMapping
-    public List<PlayerResponseDTO> getPlayers() {
-        return playerService.getPlayers();
+    public ResponseEntity<List<PlayerResponseDTO>> getPlayers() {
+        List<PlayerResponseDTO> players = playerService.getPlayers();
+        return ResponseEntity.ok(players) ;
     }
 
     @GetMapping("/{id}")
-    public PlayerResponseDTO getPlayerById(@PathVariable int id) {
-        return playerService.getPlayerById(id);
+    public ResponseEntity<?> getPlayerById(@PathVariable int id) {
+        PlayerResponseDTO player = playerService.getPlayerById(id);
+        if (player != null) {
+            return ResponseEntity.ok(player);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Jogador com ID " + id + " não encontrado.");
+        }
     }
 
     @PostMapping
-    public PlayerResponseDTO createPlayer(@RequestBody PlayerRequestDTO player) {
-        return playerService.createPlayer(player);
+    public ResponseEntity<String> createPlayer(@RequestBody PlayerRequestDTO player) {
+        PlayerResponseDTO newPlayer = playerService.createPlayer(player);
+        return ResponseEntity.ok("Jogador " + newPlayer.getKnowAs() + " criado com sucesso.");
     }
 
     @PutMapping("/{id}")
-    public PlayerResponseDTO updatePlayerById(@PathVariable int id, @RequestBody PlayerRequestDTO player) {
-        return playerService.updatePlayerById(id, player);
+    public ResponseEntity<?> updatePlayerById(@PathVariable int id, @RequestBody PlayerRequestDTO player) {
+        PlayerResponseDTO updatedPlayer = playerService.updatePlayerById(id, player);
+        if (updatedPlayer != null) {
+            return ResponseEntity.ok(updatedPlayer);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Jogador com ID " + id + " não encontrado.");
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deletePlayerById(@PathVariable int id) {
-        playerService.deletePlayerById(id);
+    public ResponseEntity<String> deletePlayerById(@PathVariable int id) {
+        if (playerService.getPlayerById(id) != null) {
+            playerService.deletePlayerById(id);
+            return ResponseEntity.ok("Jogador com ID " + id + " deletado com sucesso.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Jogador com ID " + id + " não encontrado.");
+        }
     }
 
 }
