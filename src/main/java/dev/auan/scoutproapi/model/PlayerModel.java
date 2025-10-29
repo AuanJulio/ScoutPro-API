@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -30,7 +31,7 @@ public class PlayerModel {
 
     @Column(name = "birth_date")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "nationality")
     private String nationality;
